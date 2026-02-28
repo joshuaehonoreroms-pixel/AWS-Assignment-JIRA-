@@ -28,7 +28,7 @@ chmod +x /usr/local/bin/docker-compose
 ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
 # Clone the repo (public GitHub repo)
-REPO_URL="https://github.com/Ksschkw/PMS.git"
+REPO_URL="https://github.com/joshuaehonoreroms-pixel/AWS-Assignment-JIRA-.git"
 APP_DIR="/home/ec2-user/app"
 
 if [ -d "$APP_DIR" ]; then
