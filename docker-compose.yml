@@ -18,7 +18,7 @@ services:
     networks:
       - microservices-net
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U admin_user -d db"]
+      test: [ "CMD-SHELL", "pg_isready -U admin_user -d db" ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -37,7 +37,7 @@ services:
     networks:
       - microservices-net
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U admin_user -d db"]
+      test: [ "CMD-SHELL", "pg_isready -U admin_user -d db" ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -45,7 +45,7 @@ services:
   # ─── Kafka ────────────────────────────────────────────────────────────────
 
   kafka:
-    image: bitnamilegacy/kafka:3.7.0
+    image: bitnami/kafka:3.7.0
     container_name: kafka
     environment:
       KAFKA_CFG_NODE_ID: 0
@@ -61,7 +61,7 @@ services:
     networks:
       - microservices-net
     healthcheck:
-      test: ["CMD-SHELL", "kafka-topics.sh --bootstrap-server localhost:9092 --list"]
+      test: [ "CMD-SHELL", "kafka-topics.sh --bootstrap-server localhost:9092 --list" ]
       interval: 15s
       timeout: 10s
       retries: 10
@@ -83,6 +83,7 @@ services:
       SPRING_DATASOURCE_PASSWORD: password
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
       SPRING_SQL_INIT_MODE: always
+      JWT_SECRET: mysupers3cr3tjwtsigningk3yforpatientmanagementsystem2024
     ports:
       - "4005:4005"
     networks:
@@ -107,9 +108,11 @@ services:
       SPRING_SQL_INIT_MODE: always
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
       BILLING_SERVICE_ADDRESS: billing-service
-      BILLING_SERVICE_GRPC_PORT: 9001
+      BILLING_SERVICE_GRPC_PORT: 9005
+      JAVA_TOOL_OPTIONS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
     ports:
       - "4000:4000"
+      - "5005:5005"
     networks:
       - microservices-net
     restart: on-failure
@@ -120,10 +123,10 @@ services:
       dockerfile: Dockerfile
     container_name: billing-service
     environment:
-      GRPC_SERVER_PORT: 9001
+      GRPC_SERVER_PORT: 9005
     ports:
       - "4001:4001"
-      - "9001:9001"
+      - "9005:9005"
     networks:
       - microservices-net
     restart: on-failure
@@ -163,6 +166,7 @@ services:
 volumes:
   patient-db-data:
   auth-db-data:
+
 
 networks:
   microservices-net:
