@@ -1,5 +1,5 @@
-INSTANCE_ID=i-0d65b5ced25409a94
-PUBLIC_IP=54.152.193.125
-REGION=us-east-1
-KEY_FILE=microservices-key.pem
-SECURITY_GROUP=sg-0669f56090ebd9d84
+INSTANCE_ID=i-0f427bb3812caee1b
+PUBLIC_IP=13.48.3.142
+REGION=eu-north-1
+KEY_FILE=microservices-key-v2.pem
+SECURITY_GROUP=sg-0ffea72231dc8ca4e

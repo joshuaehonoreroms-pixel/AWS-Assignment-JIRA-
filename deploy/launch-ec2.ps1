@@ -10,9 +10,9 @@
 # ============================================================
 
 param(
-    [string]$Region = "us-east-1",
+    [string]$Region = "eu-north-1",
     [string]$InstanceType = "t3.large",
-    [string]$KeyName = "microservices-key"
+    [string]$KeyName = "microservices-key-v2"
 )
 
 Write-Host "=============================================" -ForegroundColor Cyan
@@ -20,9 +20,14 @@ Write-Host " Java Spring Microservices - AWS EC2 Launcher" -ForegroundColor Cyan
 Write-Host "=============================================" -ForegroundColor Cyan
 
 # --- Step 1: Reconfigure AWS CLI -----------------------------
-Write-Host "`n[1/5] Reconfiguring AWS CLI..." -ForegroundColor Yellow
-Write-Host "  Enter your personal AWS credentials when prompted." -ForegroundColor Gray
-aws configure
+Write-Host "`n[1/5] Checking AWS CLI Configuration..." -ForegroundColor Yellow
+try {
+    aws sts get-caller-identity --query "Account" --output text | Out-Null
+    Write-Host "  AWS CLI is already configured. Skipping 'aws configure'." -ForegroundColor Green
+} catch {
+    Write-Host "  AWS CLI not configured or credentials invalid. Prompting..." -ForegroundColor Gray
+    aws configure
+}
 
 # --- Step 2: Create Key Pair ---------------------------------
 Write-Host "`n[2/5] Creating EC2 Key Pair '$KeyName'..." -ForegroundColor Yellow

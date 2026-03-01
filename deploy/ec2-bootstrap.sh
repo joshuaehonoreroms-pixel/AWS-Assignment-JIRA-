@@ -42,7 +42,11 @@ fi
 
 cd "$APP_DIR"
 
+# Memory limits are now handled directly in the docker-compose.yml in the repo
+echo "Using optimized docker-compose.yml from repo..."
+
 # Give ec2-user ownership
+chown -R ec2-user:ec2-user "$APP_DIR"
 chown -R ec2-user:ec2-user "$APP_DIR"
 
 # Start all services in detached mode
