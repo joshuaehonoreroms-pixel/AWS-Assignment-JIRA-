@@ -85,7 +85,7 @@ services:
       SPRING_DATASOURCE_PASSWORD: password
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
       SPRING_SQL_INIT_MODE: always
-      JWT_SECRET: mysupers3cr3tjwtsigningk3yforpatientmanagementsystem2024
+      JWT_SECRET: bXlzdXBlcnMzY3IzdGp3dHNpZ25pbmdrM3lmb3JwYXRpZW50bWFuYWdlbWVudHN5c3RlbTIwMjQ=
     ports:
       - "4005:4005"
     networks:
